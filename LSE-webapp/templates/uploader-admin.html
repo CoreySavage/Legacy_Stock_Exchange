@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="media">
+    <div class="body">
+      <h1>Administration - Uploaders</h1>
+      <h2>{{ name }}</h2>
+    </div>
+    {% if uploader_name %}
+    <div>
+      {% if add %}
+      <h3>New Uploader:</h3>
+      {% else %}
+      <h3>Removed Uploader:</h3>
+      {% endif %}
+      <p><strong>Name: </strong>{{ uploader_name }}</p>
+      <p><strong>Server: </strong>{{ upload_server }}</p>
+
+    </div>
+    {% endif %}
+     <div class="form">
+      <h3>Add/Remove Uploader:</h3>
+      <form action="/admin/uploader" method="post">
+        User Token:
+        <input type="text" name="token" placeholder="User Auth Token"><br>
+        Server:
+        <select name="server">
+          {% for key, value in servers.iteritems() %}
+          <option value="{{ value }}">{{ value }}</option>
+          {% endfor %}
+        </select><br>
+        <input type="radio" name="add_remove" value="1" checked> Add<br>
+        <input type="radio" name="add_remove" value="0"> Remove<br>
+        <input type="submit" value="Submit" class="btn">
+      </form>
+    </div>
+  </div>
+  
+{% endblock %}

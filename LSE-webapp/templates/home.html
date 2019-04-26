@@ -1,0 +1,380 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  {% if logged_in %}
+    <h3>Home</h3>
+    <div class="body">
+      <p>Data goes here for {{ server }} and {{ faction }}</p>
+    </div>
+  {% else %}
+<div class="well" id="well">
+  <div class="panel" id="landing">
+  <div class="overlay" id="overlay_search">
+    <div id="overlay_title">
+      <span onclick="overlay_toggle('overlay_search')" id="close_bttn">x</span>
+      <h3>Select a Faction and Server</h3>
+    </div>
+    <div id="overlay_faction">
+      <button class="btn active_btn_ally" id="btn_ally" onclick="overlayToggle(this)">Alliance</button>
+      <button class="btn" id="btn_horde" onclick="overlayToggle(this)">Horde</button>
+    </div>
+    <div id="overlay_server">
+      {% for key, value in servers.iteritems() %}
+        {% if not loop.first %}
+          <div class="server_bttn" onclick="location.href='/{{ value|lower }}/horde';" onmouseover="img_blur(this)" onmouseout="img_normal(this)">
+            <div class="blur_image" id="server_img_{{ key }}" style='background-image: url("/img/server_{{ value }}.jpg")'></div>
+            <h4>{{ value }}</h4>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="overlay" id="overlay_login">
+    <div id="overlay_title">
+      <span onclick="overlay_toggle('overlay_login', 'overlay_search')" id="close_bttn">x</span>
+      <h3>Sign in with:</h3>
+    </div>
+    <div id="overlay_login_container">
+      <div class="overlay_login_bttn" id="overlay_login_Google" onclick="location.href='/auth/googleplus?destination_url={{ destination_url }}';" onmouseover="img_blur(this, 'Google+')" onmouseout="img_normal(this, 1)">
+        <div class="blur_image" ><?xml version="1.0" encoding="iso-8859-1"?>
+        <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 96.828 96.827" style="enable-background:new 0 0 96.828 96.827;" xml:space="preserve">
+        <g>
+          <g>
+            <path d="M62.617,0H39.525c-10.29,0-17.413,2.256-23.824,7.552c-5.042,4.35-8.051,10.672-8.051,16.912    c0,9.614,7.33,19.831,20.913,19.831c1.306,0,2.752-0.134,4.028-0.253l-0.188,0.457c-0.546,1.308-1.063,2.542-1.063,4.468    c0,3.75,1.809,6.063,3.558,8.298l0.22,0.283l-0.391,0.027c-5.609,0.384-16.049,1.1-23.675,5.787    c-9.007,5.355-9.707,13.145-9.707,15.404c0,8.988,8.376,18.06,27.09,18.06c21.76,0,33.146-12.005,33.146-23.863    c0.002-8.771-5.141-13.101-10.6-17.698l-4.605-3.582c-1.423-1.179-3.195-2.646-3.195-5.364c0-2.672,1.772-4.436,3.336-5.992    l0.163-0.165c4.973-3.917,10.609-8.358,10.609-17.964c0-9.658-6.035-14.649-8.937-17.048h7.663c0.094,0,0.188-0.026,0.266-0.077    l6.601-4.15c0.188-0.119,0.276-0.348,0.214-0.562C63.037,0.147,62.839,0,62.617,0z M34.614,91.535    c-13.264,0-22.176-6.195-22.176-15.416c0-6.021,3.645-10.396,10.824-12.997c5.749-1.935,13.17-2.031,13.244-2.031    c1.257,0,1.889,0,2.893,0.126c9.281,6.605,13.743,10.073,13.743,16.678C53.141,86.309,46.041,91.535,34.614,91.535z     M34.489,40.756c-11.132,0-15.752-14.633-15.752-22.468c0-3.984,0.906-7.042,2.77-9.351c2.023-2.531,5.487-4.166,8.825-4.166    c10.221,0,15.873,13.738,15.873,23.233c0,1.498,0,6.055-3.148,9.22C40.94,39.337,37.497,40.756,34.489,40.756z" fill="#FFFFFF"/>
+            <path d="M94.982,45.223H82.814V33.098c0-0.276-0.225-0.5-0.5-0.5H77.08c-0.276,0-0.5,0.224-0.5,0.5v12.125H64.473    c-0.276,0-0.5,0.224-0.5,0.5v5.304c0,0.275,0.224,0.5,0.5,0.5H76.58V63.73c0,0.275,0.224,0.5,0.5,0.5h5.234    c0.275,0,0.5-0.225,0.5-0.5V51.525h12.168c0.276,0,0.5-0.223,0.5-0.5v-5.302C95.482,45.446,95.259,45.223,94.982,45.223z" fill="#FFFFFF"/>
+          </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+        </div>
+        <h4></h4>
+      </div>
+      <div class="overlay_login_bttn" id="overlay_login_Facebook" onclick="location.href='/auth/facebook?destination_url={{ destination_url }}';" onmouseover="img_blur(this, 'Facebook')" onmouseout="img_normal(this, 1)">
+        <div class="blur_image"><?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 96.124 96.123" style="enable-background:new 0 0 96.124 96.123;" xml:space="preserve">
+<g>
+  <path d="M72.089,0.02L59.624,0C45.62,0,36.57,9.285,36.57,23.656v10.907H24.037c-1.083,0-1.96,0.878-1.96,1.961v15.803   c0,1.083,0.878,1.96,1.96,1.96h12.533v39.876c0,1.083,0.877,1.96,1.96,1.96h16.352c1.083,0,1.96-0.878,1.96-1.96V54.287h14.654   c1.083,0,1.96-0.877,1.96-1.96l0.006-15.803c0-0.52-0.207-1.018-0.574-1.386c-0.367-0.368-0.867-0.575-1.387-0.575H56.842v-9.246   c0-4.444,1.059-6.7,6.848-6.7l8.397-0.003c1.082,0,1.959-0.878,1.959-1.96V1.98C74.046,0.899,73.17,0.022,72.089,0.02z" fill="#FFFFFF"/>
+</g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+</svg>
+</div>
+        
+        <h4></h4>
+      </div>
+      <div class="overlay_login_bttn" id="overlay_login_Twitter" onclick="location.href='/auth/twitter';" onmouseover="img_blur(this, 'Twitter')" onmouseout="img_normal(this, 1)">
+        <div class="blur_image" > <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve" width="512px" height="512px">
+<g>
+  <g>
+    <path d="M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411    c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513    c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101    c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104    c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194    c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485    c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z" fill="#FFFFFF"/>
+  </g></g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</div>
+        <h4 class="overlay_login_bttn_title"></h4>
+      </div>
+      <div class="overlay_login_bttn"  id="overlay_login_Windows" onclick="location.href='/auth/windows_live?destination_url={{ destination_url }}';" onmouseover="img_blur(this, 'Windows Live')" onmouseout="img_normal(this, 1)">
+        <div class="blur_image"><?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 475.082 475.082" style="enable-background:new 0 0 475.082 475.082;" xml:space="preserve">
+<g>
+  <g>
+    <polygon points="0,409.705 194.716,436.541 194.716,250.677 0,250.677   " fill="#FFFFFF"/>
+    <polygon points="0,226.692 194.716,226.692 194.716,38.544 0,65.38   " fill="#FFFFFF"/>
+    <polygon points="216.129,439.398 475.082,475.082 475.082,250.677 475.082,250.674 216.129,250.674   " fill="#FFFFFF"/>
+    <polygon points="216.132,35.688 216.132,226.692 475.082,226.692 475.082,0   " fill="#FFFFFF"/>
+  </g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</div>
+        
+        <h4></h4>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <h1>Legacy Stock Exchange</h1>
+    <nav class="follow-scroll">
+       <ul>
+         <li><a class="overlay_bttn" id="search_bttn" onclick="overlay_toggle('overlay_search', 'overlay_login')">Enter</a></li>
+         <li><a class="overlay_bttn" id="login_bttn" onclick="overlay_toggle('overlay_login', 'overlay_search')">Sign In</a></li>
+       </ul>
+    </nav>
+    </div>
+  <div class="panel" id="info1">
+    <h1>Info 1</h1>
+    <span class="top">&uarr;</span>
+  </div>
+  <div class="panel" id="info2">
+    <h1>Info 2</h1>
+    <span class="top">&uarr;</span>
+  </div>
+  <div class="panel" id="info3">
+    <h1>Info 3</h1>
+    <span class="top">&uarr;</span>
+  </div>
+  <div class="panel" id="info4">
+    <h1>Info 4</h1>
+    <span class="top">&uarr;</span>
+  </div>
+</div>
+
+<script>
+
+function img_blur(x, input_text) {
+  x.style.cursor = "pointer";
+  var img = x.getElementsByTagName("DIV")[0];
+  var title = x.getElementsByTagName("H4")[0];
+  if (input_text) {
+    title.textContent = input_text;
+    title.style.color = "rgba(255, 255, 255, .9)";
+  }
+  else {
+    title.style.color = "rgba(239, 83, 80, 1)";
+  }
+  img.className += " blurred"
+
+}
+
+function img_normal(x, remove_text) {
+  x.style.cursor = "default";
+  var img = x.getElementsByTagName("DIV")[0];
+  var title = x.getElementsByTagName("H4")[0];
+  if (remove_text){
+    title.textContent = "";
+  }
+  title.style.color = "rgba(255, 255, 255, 0.7)";
+  img.className = "blur_image"
+}
+
+function faction_toggle(faction) {
+  var alliance = document.getElementById("yes");
+  var alliance_label = document.getElementById("switch_alliance");
+  var horde = document.getElementById("no");
+  var horde_label = document.getElementById("switch_horde");
+  if (faction == "switch_horde") {
+    document.getElementById("switch_indicator").style.color = "red";
+    alliance_label.className = "";
+    horde_label.className = "active";
+    document.getElementById("faction_switch").style.backgroundImage = "url('/img/switch_horde.jpg')";
+    document.getElementById("switch_indicator").style.right = "70px";
+    document.getElementById("faction_switch").style.transition = "all 1s";
+  }
+  else {
+    document.getElementById("switch_indicator").style.color = "#4d4dff";
+    horde_label.className = "";
+    alliance_label.className = "active";
+    document.getElementById("faction_switch").style.backgroundImage = "url('/img/switch_alliance2.jpg')";
+    document.getElementById("switch_indicator").style.right = "250px";
+  }
+};
+
+function overlay_toggle(overlay, other_overlay) {
+  var overlay_t = document.getElementById(overlay);
+  var title = document.getElementsByTagName("H1")[0];
+  if (overlay_t.className == "overlay") {
+    var overlay_o = document.getElementById(other_overlay);
+    if (overlay_o.className != "overlay") {
+      overlay_o.className = "overlay";
+    }
+    overlay_t.className += " show";
+    document.getElementsByTagName("H1")[0].className = "blur";
+  }
+  else {
+    overlay_t.className = "overlay";
+    document.getElementsByTagName("H1")[0].className = "";
+  }
+
+};
+
+(function() {
+  "use strict";
+  /*[pan and well CSS scrolls]*/
+  var pnls = document.querySelectorAll('.panel').length,
+    scdir, hold = false;
+
+  function _scrollY(obj) {
+    var slength, plength, pan, step = 100,
+      vh = window.innerHeight / 100,
+      vmin = Math.min(window.innerHeight, window.innerWidth) / 100;
+    if ((this !== undefined && this.id === 'well') || (obj !== undefined && obj.id === 'well')) {
+      pan = this || obj;
+      plength = parseInt(pan.offsetHeight / vh);
+    }
+    if (pan === undefined) {
+      return;
+    }
+    plength = plength || parseInt(pan.offsetHeight / vmin);
+    slength = parseInt(pan.style.transform.replace('translateY(', ''));
+    if (scdir === 'up' && Math.abs(slength) < (plength - plength / pnls)) {
+      slength = slength - step;
+    } else if (scdir === 'down' && slength < 0) {
+      slength = slength + step;
+    } else if (scdir === 'top') {
+      slength = 0;
+    }
+    if (hold === false) {
+      hold = true;
+      pan.style.transform = 'translateY(' + slength + 'vh)';
+      setTimeout(function() {
+        hold = false;
+      }, 1000);
+    }
+    console.log(scdir + ':' + slength + ':' + plength + ':' + (plength - plength / pnls));
+  }
+  /*[swipe detection on touchscreen devices]*/
+  function _swipe(obj) {
+    var swdir,
+      sX,
+      sY,
+      dX,
+      dY,
+      threshold = 100,
+      /*[min distance traveled to be considered swipe]*/
+      slack = 50,
+      /*[max distance allowed at the same time in perpendicular direction]*/
+      alT = 500,
+      /*[max time allowed to travel that distance]*/
+      elT, /*[elapsed time]*/
+      stT; /*[start time]*/
+    obj.addEventListener('touchstart', function(e) {
+      var tchs = e.changedTouches[0];
+      swdir = 'none';
+      sX = tchs.pageX;
+      sY = tchs.pageY;
+      stT = new Date().getTime();
+      //e.preventDefault();
+    }, false);
+
+    obj.addEventListener('touchmove', function(e) {
+      e.preventDefault(); /*[prevent scrolling when inside DIV]*/
+    }, false);
+
+    obj.addEventListener('touchend', function(e) {
+      var tchs = e.changedTouches[0];
+      dX = tchs.pageX - sX;
+      dY = tchs.pageY - sY;
+      elT = new Date().getTime() - stT;
+      if (elT <= alT) {
+        if (Math.abs(dX) >= threshold && Math.abs(dY) <= slack) {
+          swdir = (dX < 0) ? 'left' : 'right';
+        } else if (Math.abs(dY) >= threshold && Math.abs(dX) <= slack) {
+          swdir = (dY < 0) ? 'up' : 'down';
+        }
+        if (obj.id === 'well') {
+          if (swdir === 'up') {
+            scdir = swdir;
+            _scrollY(obj);
+          } else if (swdir === 'down' && obj.style.transform !== 'translateY(0)') {
+            scdir = swdir;
+            _scrollY(obj);
+
+          }
+          e.stopPropagation();
+        }
+      }
+    }, false);
+  }
+  /*[assignments]*/
+  var well = document.getElementById('well');
+  well.style.transform = 'translateY(0)';
+  well.addEventListener('wheel', function(e) {
+    if (e.deltaY < 0) {
+      scdir = 'down';
+    }
+    if (e.deltaY > 0) {
+      scdir = 'up';
+    }
+    e.stopPropagation();
+  });
+  well.addEventListener('wheel', _scrollY);
+  _swipe(well);
+  var tops = document.querySelectorAll('.top');
+  for (var i = 0; i < tops.length; i++) {
+    tops[i].addEventListener('click', function() {
+      scdir = 'top';
+      _scrollY(well);
+    });
+  }
+})();
+
+function overlayToggle(x) {
+  var btn_list = x.parentElement.children;
+  if (btn_list[0].className.indexOf("active") !== -1) {
+      btn_list[0].className = "btn";
+      btn_list[1].className += " active_" + btn_list[1].id;
+    }
+    else {
+      btn_list[1].className = "btn";
+      btn_list[0].className += " active_" + btn_list[0].id;
+    }
+}
+
+</script>
+
+  {% endif %}
+{% endblock %}

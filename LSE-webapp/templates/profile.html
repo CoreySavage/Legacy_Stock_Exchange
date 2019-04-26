@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="media">
+    <div class="body">
+      <h1>{{ name }}</h1>
+      <h2>Account Preferences:</h2>
+      <p><strong>Server: </strong>{{ server }}</p>
+      <p><strong>Faction: </strong>{{ faction }}</p>
+    </div>
+    <a href="/logout" class="btn">Logout</a>
+    {% if admin %}
+    <a href="/admin" class="btn">Admin</a>
+    {% endif %}
+    {% if admin %}
+    <a href="/upload" class="btn">Upload</a>
+    {% endif %}
+  </div>
+  
+    
+{% endblock %}

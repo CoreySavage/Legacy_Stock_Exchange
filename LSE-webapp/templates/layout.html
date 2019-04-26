@@ -1,0 +1,165 @@
+<!doctype html>
+{% if page_id %}
+<html id="{{ page_id }}">
+{% else %}
+<html>
+{% endif %}
+<head>
+  <meta charset="utf-8">
+  <title>Legacy Stock Exchange</title>
+  <meta name="author" content="cloudware.it">
+  <link rel="stylesheet" href="/css/style-v0_15.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+{% if page_id %}
+<body id="{{ page_id }}">
+{% else %}
+<body>
+{% endif %}
+
+
+  {% if not home or logged_in %}
+  <div class="navbar">
+    <nav class="navbar">
+      <a class="nav-home" id="logo_button" href="/">
+
+
+
+
+
+<svg width="32px" height="31px" viewBox="0 0 32 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo_small" fill="#ffffff">
+            <path d="M-3.55271368e-15,29.8133717 L8.50121761,29.8133717 L8.50121761,27.9856099 L2.18906353,27.9856099 L2.18906353,15.2550365 L-3.55271368e-15,15.2550365 L-3.55271368e-15,29.8133717 Z M14.799203,30.0684082 C18.2634492,30.0684082 19.8361744,28.3681647 19.8361744,25.7115342 C19.8361744,23.203675 18.4547266,22.247288 16.2656631,21.5459376 L14.8204561,21.0996236 C13.3114899,20.6320567 12.865176,20.0794775 12.865176,18.8255479 C12.865176,17.5291122 13.7790569,16.8277618 15.3942882,16.8277618 C16.9882665,16.8277618 18.178437,17.2103166 19.0710649,17.5928714 L19.0710649,15.8076157 C18.2634492,15.4038078 17.2433031,15 15.3942882,15 C12.2700908,15 10.6973655,16.6577374 10.6973655,19.0168253 C10.6973655,21.3759132 11.9300421,22.4385654 13.9278282,23.0549037 L15.3517822,23.5224707 C17.0095196,24.0537968 17.5833518,24.6063759 17.5833518,25.8815585 C17.5833518,27.3267655 16.711977,28.2406464 14.6504317,28.2406464 C13.0989595,28.2406464 11.6750055,27.8580916 10.5485942,27.3267655 L10.5485942,29.1120212 C11.5474873,29.6646004 12.9501882,30.0684082 14.799203,30.0684082 Z M23.0737215,29.8133717 L32,29.8133717 L32,27.9856099 L25.262785,27.9856099 L25.262785,23.224928 L30.4272747,23.224928 L30.4272747,21.4184193 L25.262785,21.4184193 L25.262785,17.0827983 L31.9149878,17.0827983 L31.9149878,15.2550365 L23.0737215,15.2550365 L23.0737215,29.8133717 Z" id="LSE"></path>
+            <polygon id="Path-3" points="0 14 0 6 2 6 2 14"></polygon>
+            <polygon id="Path-4" points="5 9 7 9 7 14 5 14"></polygon>
+            <polygon id="Path-7" points="10 4 12 4 12 14 10 14"></polygon>
+            <polygon id="Path-8" points="15 0 17 0 17 14 15 14"></polygon>
+            <polygon id="Path-10" points="20 6 22 6 22 14 20 14"></polygon>
+            <polygon id="Path-11" points="25 3 27 3 27 14 25 14"></polygon>
+            <polygon id="Path-13" points="30 8 32 8 32 14 30 14"></polygon>
+        </g>
+    </g>
+</svg>
+      </a>
+      <a class="nav-left" href="/about">About</a>
+      <a class="nav-left" href="/download">Download</a>
+      <a class="nav-left" href="/{{ server }}/{{ faction }}/search">Items</a>
+      <a class="nav-left" href="/{{ server }}/{{ faction }}/compare">Compare</a>
+      <div class="dropdown drop_professions">
+        <a class="dropbtn">Professions</a>
+        <div class="dropdown-content_professions" id="main_professions">
+          <a href="/professions">Alchemy</a>
+          <a href="/professions">Blacksmithing</a>
+          <a href="/professions">Enchanting</a>
+          <a class="nav-break_invis" href="/professions">Engineering</a>
+          <a href="/professions">Leatherworking</a>
+          <a href="/professions">Tailoring</a>
+        </div>
+         <div class="dropdown-content_professions" id="other_professions">
+          <a href="/professions">Cooking</a>
+          <a href="/professions">First Aid</a>
+          <a href="/professions">Fishing</a>
+          <a class="nav-break" href="/professions">Herbalism</a>
+          <a href="/professions">Mining</a>
+          <a href="/professions">Skinning</a>
+        </div>
+      </div>
+      {% if logged_in %}
+      <div class="dropdown drop_account"><a class="nav nav-right_green dropbtn" onclick="myFunction()">Account</a><div class="dropdown-content_right dropdown-content_account" id="myDropdown">
+            <a class="nav" href="/settings">{{ server }} {{ faction }}</a>
+            <a class="nav" href="/profile">Profile</a>
+            {% if uploader %}
+            <a class="nav" href="/upload">Upload</a>
+            {% endif %}
+            {% if admin %}
+            <a class="nav" href="/admin">Admin</a>
+            <a class="nav" href="/playground">Playground</a>
+            {% endif %}
+            <a class="nav" href="/logout">Logout</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="dropdown drop_sign_in"><a class="nav nav-right_red dropbtn" onclick="myFunction()">Sign In</a><div class="dropdown-content_right dropdown-content_signin" id="myDropdown">
+            <a href="/auth/googleplus?destination_url={{ destination_url }}"
+               class="nav">Google+</a>
+            <a href="/auth/facebook?destination_url={{ destination_url }}"
+               class="nav">Facebook</a>
+            <a href="/auth/twitter" class="nav">Twitter</a>
+            <a href="/auth/windows_live?destination_url={{ destination_url }}"
+               class="nav">Windows Live</a>
+          </div>
+        </div>
+
+        {% endif %}
+
+        <div class="nav-right search">
+          <input id="search_input" onclick="this.select()" onfocus="toggleFocus(1, this.value)" onblur="toggleFocus(0)" type="text" name="search" placeholder="search" onkeyup="changeInput(this.value)">
+          <script type="text/javascript">
+
+          function toggleFocus(x) {
+            var results_div = document.getElementById("result");
+            if (x) {
+              results_div.style.display = "flex";
+            }
+            else {
+              setTimeout(function(){
+                  results_div.style.display = "none";
+              }, 50);
+            }  
+          }
+          var ah_items = {{ search_suggestions|safe }};
+
+          function matchPeople(input) {
+            if (input.length == null | input.length < 2) {
+              return [];
+            }
+            var reg = new RegExp('(' + input + ')|' + input.replace(/\W/, '\\D'), 'i');
+            return ah_items.filter(function(ah_items) {
+              if (ah_items.match(reg)) {
+                return ah_items;
+              }
+            }).slice(0,9);
+          }
+
+          function changeInput(val) {
+            var autoCompleteResult = matchPeople(val);
+            var resultsDiv = document.getElementById("result");
+            resultsDiv.innerHTML = "";
+            console.log(val);
+            for (var i = autoCompleteResult.length - 1; i >= 0; i--) {
+              var newAnchor = document.createElement('a');
+              newAnchor.className = "search_autocomplete";
+              newAnchor.innerHTML = autoCompleteResult[i];
+              resultsDiv.appendChild(newAnchor);
+              newAnchor.setAttribute('onclick', 'setInput(this)');
+            }
+          }
+          function setInput(x) {
+            document.getElementById("search_input").value = x.innerHTML;
+          }
+          </script>
+        <div id="result"></div>
+      </div>
+    </nav>
+  </div>
+
+
+  {% endif %}
+  
+  <div role="main" class="container" id="page_id">
+
+
+    {% block main %}
+
+    {% endblock %}
+  </div>
+
+
+  
+</body>
+</html>

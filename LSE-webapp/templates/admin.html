@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="media">
+    <div class="body">
+      <h1>Administration</h1>
+      <h2>{{ name }}</h2>
+      <div>
+        <h3>Servers:</h3>
+        <table>
+          {% for key, value in servers.iteritems() %}
+          <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <a href="/admin/server" class="btn">Add Server</a>
+      </div>
+      <div>
+        <h3>Uploaders:</h3>
+  
+        <a href="/admin/uploader" class="btn">Edit Uploaders</a>
+      </div>
+      <div>
+        <h3>Item Database</h3>
+
+        <a href="/admin/items" class="btn">Edit Database</a>
+      </div>
+    </div>
+    
+  </div>
+  
+{% endblock %}

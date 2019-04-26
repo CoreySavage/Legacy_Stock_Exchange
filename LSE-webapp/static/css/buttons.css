@@ -1,0 +1,100 @@
+/*
+ * Button Object
+ *
+ * N.B. Assumes no dependencies or use of normalize.css
+ */
+.bttn {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: Verdana, Arial, Helvetica;
+  line-height: normal;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.4em 1em;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  background-color: rgba(0,0,0,0);
+  font-size: 12px;
+}
+.bttn, .bttn:visited, .label {
+  color: rgba(255, 255, 255, 0.6);
+}
+.bttn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.bttn:hover {
+  text-decoration: none;
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.bttn:focus, .toggle:focus {
+  outline: 0;
+}
+.bttn.large {
+  font-size: 1.25em;
+}
+
+
+.btn {
+  position: relative;
+  display: inline-block;
+  margin: 16px 16px 0px 0px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: Verdana, Arial, Helvetica;
+  line-height: normal;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.4em 1em;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0);
+}
+
+.btn:hover, .btn:focus, .btn:active {
+  text-decoration: none;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.toggle {
+  margin: 4px 4px 0;
+  width: 8px;
+  height: 8px;
+  /* border-radius: 14px; */
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.4em .4em;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  background-color: rgba(0,0,0,0);
+}
+
+
+

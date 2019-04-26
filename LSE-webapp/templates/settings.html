@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="media">
+    <div class="body">
+      <h2>Settings</h2>
+      <h2>Account Preferences:</h2>
+      <p><strong>Server: </strong>{{ server }}</p>
+      <p><strong>Faction: </strong>{{ faction }}</p>
+    </div>
+     <div class="form">
+      <h2>Update Preferences:</h2>
+     <form action="/settings" method="post">
+      Server:
+      <select name="server">
+        {% for key, value in servers.iteritems() %}
+        <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+      </select><br>
+      Faction:
+      <select name="faction">
+        {% for key, value in factions.iteritems() %}
+        <option value="{{ key }}">{{ value }}</option>
+        {% endfor %}
+      </select><br>
+      <input type="submit" value="Submit" class="btn">
+    </form>
+    </div>
+  </div>
+{% endblock %}

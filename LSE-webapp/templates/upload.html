@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="media">
+    <div class="body">
+      <h2>Upload</h2>
+      <h2>{{ name }}</h2>
+      {% if success %}
+      <h4>Upload Sucessful</h4>
+      <p>We appreciate the contribution!</p>
+      {% endif %}
+
+      <p><strong>Server: </strong>{{ server }}</p>
+      <div class="form">
+        <h2>Auction House:</h2>
+        {% if error_filename or error_faction or error_server %}
+        <div class="error">
+          <p class="error errorTitle">Error: File Not Uploaded!</p>
+          <p><strong>Filename = LSE-Uploader.lua</strong></p>
+
+          {% if error_server %}
+          <p class="error">Server = {{ server }}</p>
+          {% else %}
+          <p><strong>Server = {{ server }}</strong></p>
+          {% endif %}
+
+          {% if error_faction %}
+          <p class="error">Faction = {{ faction }}</p>
+          {% else %}
+          <p><strong>Faction = {{ faction }}</strong></p>
+          {% endif %}
+
+        </div>
+        {% endif %}
+        <form action="/upload" enctype="multipart/form-data" method="post">
+          {% if servers %}
+          Server:
+          <select name="server">
+            {% for key, value in servers.iteritems() %}
+            <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+          </select><br>
+          {% endif %}
+          Faction:
+          <select name="faction">
+            {% for key, value in factions.iteritems() %}
+            <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+          </select><br>
+          Auction House Data:
+          <input type="file" name="data" accept=".json" class="file" ><br>
+          <input type="submit" value="Submit" class="btn">
+        </form>
+      </div>
+    </div>
+    
+  </div>
+  
+{% endblock %}
